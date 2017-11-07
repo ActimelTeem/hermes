@@ -1,0 +1,22 @@
+{% extends 'orders/base.html' %}
+
+{% block content %}
+    <div class="post">
+            <h1>
+                Заказ: {{ order.id }}
+                <a class="btn btn-default" href="{% url 'order_edit' id=order.id %}"><span class="glyphicon glyphicon-pencil"></span></a>
+            </h1>
+            <p>Время заказа: {{ order.order_date }}</p>
+            <p>Статус: {{ order.order_status }}</p>
+            <p>Статус платежа: {{ order.payment_status }}</p>
+            <p>К оплате: {{ order.order_cost }}</p>
+            <p>Имя менеджера: {{ order.order_manager }}</p>
+            <p>Имя клиента: {{ order.order_client }}</p>
+            <p>Адрес: {{ order.order_location }}</p>
+            <p>{{ order.content|linebreaksbr }}</p>
+            <p>Комментарий клиента: {{ order.order_client_comment }}</p>
+            <p>Имя курьера: {{ order.order_courier }}</p>
+            <p>Комментарий курьера: {{ order.order_courier_comment }}</p>
+            <p>Время доставки: {{ order.order_dest_date }}</p>
+    </div>
+{% endblock %}
