@@ -1,19 +1,9 @@
-"""
-+ выводить информацию в консоль о подключении и т.д.
-пароль не засвечивать
-+ подтверждение от курьера по заказу
-+ геолокация
-вынести в файл токен, ключ гугла
-
-from hermes.constants import token
-"""
-
 import telebot
 import sqlite3
 import requests
+import constants
 
-Token = '467379466:AAFfwviUU9AHO2Sb9bs8YGssFYGmE9EhbB4'
-bot = telebot.TeleBot(Token)
+bot = telebot.TeleBot(constants.token)
 
 courier_list = {}
 
@@ -76,8 +66,7 @@ class Order:
 
     def info(self):   #получение строки с информацией о заказе
         info = "Номер: {}\nСодержимое: {}\nАдрес: {}\nКлиент: {}\nКоментарий: {}\nСтоимость: {}\nДата оформления: {}\nПлатежный статус: {}\n".format(self.number, self.content, self.location, self.client, self.client_comment, self.cost, self.date, self.payment_status)
-        key = "AIzaSyCV-7aHiRjSshta2PHDrQ8aeemiWBzHfgc"
-        url = "https://maps.googleapis.com/maps/api/geocode/json?address={}&key={}".format(self.location.replace(" ", "+"), key)
+        url = "https://maps.googleapis.com/maps/api/geocode/json?address={}&key={}".format(self.location.replace(" ", "+"), constants.maps_key)
         results = requests.get(url).json()
         try:
             return info, results["results"][0]["geometry"]["location"]
@@ -295,6 +284,7 @@ def check_answer(message):
                 complete_order(message)
             elif message.text == "Отменить заказ":
                 cancel_order(message)
+
         else:
             if message.text == "Получить заказ":
                 get_new_order(message)
