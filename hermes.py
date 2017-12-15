@@ -142,7 +142,9 @@ def is_login(func):
         if message.chat.id in courier_list and courier_list[message.chat.id].login_status == True:
             func(message)
         else:
-            bot.send_message(message.chat.id, "Для использования сервиса войдите в систему - /start")
+            keyboard = telebot.types.ReplyKeyboardMarkup()
+            keyboard.row("Авторизация")
+            bot.send_message(message.chat.id, "Для использования сервиса войдите в систему - /start", reply_markup=keyboard)
     return new_func
 
 
@@ -220,7 +222,9 @@ def check_answer(message):
         if message.text == "Авторизация":
             login(message)
         else:
-            bot.send_message(message.chat.id, "Для использования сервиса войдите в систему - /start")
+            keyboard = telebot.types.ReplyKeyboardMarkup()
+            keyboard.row("Авторизация")
+            bot.send_message(message.chat.id, "Для использования сервиса войдите в систему - /start", reply_markup=keyboard)
 
     elif courier_list[message.chat.id].state == "password":
         courier_list[message.chat.id].password = message.text
