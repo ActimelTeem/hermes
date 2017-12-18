@@ -74,12 +74,12 @@ class Order:
             return info, False
 
     def complete(self):
-        DB = DataBase("db.sqlite3")
+        DB = DataBase(constants.db)
         DB.change_order_status(self.number, 2)  # изменение статуса взятого заказа на выполненный
         DB.close()
 
     def cancel(self, text):
-        DB = DataBase("db.sqlite3")
+        DB = DataBase(constants.db)
         DB.courier_comment(self.number, text)
         DB.change_order_status(self.number, 1)  # изменение статуса взятого заказа на отмененный
         DB.close()
@@ -96,7 +96,7 @@ class Courier:  #класс курьера
         self.order_status = False   #существует-ли активный заказ
 
     def login_system(self): #авторизация клиента
-        DB = DataBase("db.sqlite3")
+        DB = DataBase(constants.db)
         result = DB.login(self.login, self.password)
         DB.close()
         try:
@@ -110,7 +110,7 @@ class Courier:  #класс курьера
             return False
 
     def is_order(self):
-        DB = DataBase("db.sqlite3")
+        DB = DataBase(constants.db)
         result = DB.check_order(self.id)
         if result != False:
             self.Ord = Order(result)
@@ -122,7 +122,7 @@ class Courier:  #класс курьера
 
     def new_order(self):    #получение нового заказа
         if not self.is_order():
-            DB = DataBase("db.sqlite3")
+            DB = DataBase(constants.db)
             result = DB.get_order(self.id)
             if result != False:
                 self.Ord = Order(result)
