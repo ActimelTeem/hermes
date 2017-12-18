@@ -3,7 +3,7 @@
 {% block content %}
     {% for order in orders %}
         <div class="order">
-            <h1><a href="{% url 'order_detail' id=order.id %}">Заказ: {{ order.id }}</a></h1>
+            <h1><a href="{% url 'order_detail' order_id=order.order_id %}">Заказ: {{ order.order_id }}</a></h1>
           <!--  <h1><a href="">Заказ {{ order.id }}</a></h1> -->
             <p>Время заказа: {{ order.order_date }}</p>
             <p>Статус: {{ order.order_status }}</p>

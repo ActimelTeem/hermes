@@ -8,7 +8,7 @@ class OrderForm(forms.ModelForm):
         model = Order
         fields = ('content',
                   'order_location',
-                  'order_status',
+                  'oder_status',
                   'order_client_comment',
                   'order_client',
                   'payment_status',
