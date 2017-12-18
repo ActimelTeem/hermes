@@ -3,8 +3,8 @@
 {% block content %}
     <div class="post">
             <h1>
-                Заказ: {{ order.id }}
-                <a class="btn btn-default" href="{% url 'order_edit' id=order.id %}"><span class="glyphicon glyphicon-pencil"></span></a>
+                Заказ: {{ order.order_id }}
+                <a class="btn btn-default" href="{% url 'order_edit' order_id=order.order_id %}"><span class="glyphicon glyphicon-pencil"></span></a>
             </h1>
             <p>Время заказа: {{ order.order_date }}</p>
             <p>Статус: {{ order.order_status }}</p>

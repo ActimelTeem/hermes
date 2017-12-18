@@ -14,7 +14,7 @@ class PaymentStatus(models.Model):
         return self.status
 
 class Order(models.Model):
-    id = models.AutoField(primary_key=True)
+    order_id = models.AutoField(primary_key=True)
     content = models.TextField()
     order_location = models.CharField(max_length=200)
     order_status = models.ForeignKey('crm.OrderStatus')
@@ -33,6 +33,6 @@ class Order(models.Model):
         self.save()
 
     def __str__(self):
-        return str(self.id)
+        return str(self.order_id)
 
 # Create your models here.
