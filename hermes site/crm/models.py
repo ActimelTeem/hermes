@@ -25,7 +25,7 @@ class Order(models.Model):
     order_date = models.DateTimeField(blank=True, null=True)
     order_cost = models.FloatField()
     order_manager = models.ForeignKey('auth.User')
-    order_courier_id = models.TextField()
+    order_courier_id = models.ForeignKey('crm.OrderStatus')
     order_dest_date = models.DateTimeField(blank=True, null=True)
 
     def publish(self):
