@@ -30,18 +30,18 @@ class DataBase: #класс для работы с БД
         self.cursor.execute("SELECT * FROM crm_order WHERE order_status_id = 4")
         answer = self.cursor.fetchone()
         try:
-            self.cursor.execute("UPDATE crm_order SET order_courier_id =:courier_id WHERE id = :number", {"courier_id": courier_id, "number": answer[-1]})
+            self.cursor.execute("UPDATE crm_order SET order_courier_id =:courier_id WHERE order_id = :number", {"courier_id": courier_id, "number": answer[-1]})
             self.cursor.fetchone()
             return answer
         except:
             return False
 
     def change_order_status(self, number, status):  #изменение статуса заказа в БД
-        self.cursor.execute("UPDATE crm_order SET order_status_id = :status WHERE id = :number", {"status": status, "number": number})
+        self.cursor.execute("UPDATE crm_order SET order_status_id = :status WHERE order_id = :number", {"status": status, "number": number})
         self.cursor.fetchone()
 
     def courier_comment(self, number, text):
-        self.cursor.execute("UPDATE crm_order SET order_courier_comment = :text WHERE id = :number", {"text": text, "number": number})
+        self.cursor.execute("UPDATE crm_order SET order_courier_comment = :text WHERE order_id = :number", {"text": text, "number": number})
         self.cursor.fetchone()
 
     def close(self):    #закрытие БД
