@@ -13,4 +13,4 @@ class OrderForm(forms.ModelForm):
                   'order_client',
                   'payment_status',
                   'order_cost',
-                  'order_courier_id')
+                  'order_courier')

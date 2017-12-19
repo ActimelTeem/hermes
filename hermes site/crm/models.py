@@ -13,6 +13,15 @@ class PaymentStatus(models.Model):
     def __str__(self):
         return self.status
 
+class Couriers(models.Model):
+    login = models.TextField()
+    password = models.IntegerField()
+    name = models.TextField()
+    surname = models.TextField() 
+
+    def __str__(self):
+        return self.name
+
 class Order(models.Model):
     order_id = models.AutoField(primary_key=True)
     content = models.TextField()
@@ -25,7 +34,7 @@ class Order(models.Model):
     order_date = models.DateTimeField(blank=True, null=True)
     order_cost = models.FloatField()
     order_manager = models.ForeignKey('auth.User')
-    order_courier_id = models.ForeignKey('crm.OrderStatus')
+    order_courier = models.ForeignKey('crm.Couriers')
     order_dest_date = models.DateTimeField(blank=True, null=True)
 
     def publish(self):
